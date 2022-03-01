@@ -5,13 +5,12 @@
 		e.preventDefault();
 	}
 </script>
-
 <main>
 	<div id="intro">
 		<h1>DoppChat</h1>
 		<p>
-			Create ephemeral chat rooms and invite your friends to the <strong>decentralized Dopps</strong
-			>
+			Create ephemeral chat rooms and invite your friends to the <strong>decentralized Dopps.</strong><br><br>
+			To learn more about the project, <a href="https://docs.com" target="_blank"><br> click here</a>.
 		</p>
 	</div>
 
@@ -22,7 +21,7 @@
 		<br />
 		<button type="submit">Login</button>
 		<button type="button" class="login-with-google-btn"> Sign in with Google </button>
-		<spam>Don't have an account yet? <a href="./signup">Create one!</a></spam>
+		<spam>Don't have an account yet? <a href="signup">Create one!</a></spam>
 	</form>
 </main>
 
@@ -76,7 +75,7 @@
 		border: 5px solid #9446e2;
 		padding: 4px 8px;
 		border-radius: 0.2rem;
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		background-color: #9446e2;
 		color: #e9f1f7;
 	}
@@ -109,7 +108,7 @@
 		box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
 
 		color: #757575;
-		font-size: 14px;
+		font-size: 17px;
 		font-weight: 500;
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 			'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
