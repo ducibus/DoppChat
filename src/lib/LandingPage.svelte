@@ -14,7 +14,7 @@
 		<p>
 			Create ephemeral chat rooms and invite your friends to the <strong>decentralized Dopps</strong
 			><br /><br />
-			<a href="https://docs.com" target="_blank">Learn more</a> about the project.
+			<a href="https://docs.doppchat.ml" target="_blank">Learn more</a> about the project.
 		</p>
 	</div>
 

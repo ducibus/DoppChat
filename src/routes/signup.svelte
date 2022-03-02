@@ -1,12 +1,16 @@
 <script lang="ts">
+	import { validateSignUpPass } from '../lib/authHandler';
     let username: string;
     let email: string;
 	let password: string;
     let confirmPassword: string;
-	function login(e: any) {
-		e.preventDefault()};
+	
+	function handleSubmit(e: any) {
+		e.preventDefault();
+		validateSignUpPass(email, confirmPassword, password);
+	}
 </script>
-<form id="authcontainer" on:submit={login}>
+<form id="authcontainer" on:submit={handleSubmit}>
     <br />
     <h1>Create Account</h1>
     <input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
@@ -14,7 +18,7 @@
     <input name="password" placeholder="Password" bind:value={password} type="password" />
     <input name="confirmPassword" placeholder="Confirm Password" bind:value={confirmPassword} type="password" />
     <br />
-    <button type="submit">Continue</button>
+    <button type="submit" on:submit={handleSubmit}>Continue</button>
 </form>
 
 

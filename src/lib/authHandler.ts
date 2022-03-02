@@ -9,7 +9,7 @@ import {
 	signOut
 } from 'firebase/auth';
 const provider = new GoogleAuthProvider();
-let auth = getAuth();
+const auth = getAuth();
 
 export function login(email: string, password: string) {
 	signInWithEmailAndPassword(auth, email, password).catch((error) => {
@@ -18,7 +18,6 @@ export function login(email: string, password: string) {
 		alert(`${errorCode}: ${errorMessage}`);
 	});
 }
-
 export function googleLogin() {
 	signInWithPopup(auth, provider).catch((error) => {
 		const errorCode = error.code;
@@ -33,4 +32,12 @@ export function getCurrentUser() {
 
 export function logout() {
 	signOut(auth).catch(console.error);
+}
+
+export function validateSignUpPass(password: string, confirmPassword: string, email: string) {
+	if (password == confirmPassword) {
+		login(email, password);
+	} else {
+		alert("Passwords don't match, try again!");
+		}
 }
