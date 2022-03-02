@@ -7,7 +7,7 @@
 	
 	function handleSubmit(e: any) {
 		e.preventDefault();
-		validateSignUpPass(email, confirmPassword, password);
+		validateSignUpPass(email, password, confirmPassword);
 	}
 </script>
 <form id="authcontainer" on:submit={handleSubmit}>
