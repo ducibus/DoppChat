@@ -20,7 +20,7 @@
 
 	<form id="authcontainer" on:submit={handleSubmit}>
 		<br />
-		<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="16" />
+		<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
 		<input name="password" placeholder="Password" bind:value={password} type="password" />
 		<br />
 		<button type="submit">Login</button>

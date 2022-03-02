@@ -6,6 +6,8 @@ import {
 	getAuth,
 	signInWithPopup,
 	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
+	updateProfile,
 	signOut
 } from 'firebase/auth';
 const provider = new GoogleAuthProvider();
@@ -34,10 +36,16 @@ export function logout() {
 	signOut(auth).catch(console.error);
 }
 
-export function validateSignUpPass(password: string, confirmPassword: string, email: string) {
-	if (password == confirmPassword) {
-		login(email, password);
-	} else {
-		alert("Passwords don't match, try again!");
-		}
+export function signUp(username: string, email: string, password: string) {
+	createUserWithEmailAndPassword(auth, email, password)
+		.then((result) => {
+			updateProfile(result.user, {
+				displayName: username
+			});
+		})
+		.catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			alert(`${errorCode}: ${errorMessage}`);
+		});
 }

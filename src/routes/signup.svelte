@@ -1,26 +1,58 @@
 <script lang="ts">
-	import { validateSignUpPass } from '../lib/authHandler';
-    let username: string;
-    let email: string;
+	import { signUp } from '$lib/authHandler';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+	let username: string;
+	let email: string;
 	let password: string;
-    let confirmPassword: string;
-	
+	let confirmPassword: string;
+
 	function handleSubmit(e: any) {
 		e.preventDefault();
-		validateSignUpPass(password, confirmPassword, email);
+		if (password === confirmPassword) {
+			signUp(username, email, password);
+		} else {
+			alert('Passwords do not match');
+		}
 	}
+	onMount(() => {
+		let auth = getAuth();
+		onAuthStateChanged(auth, (user) => {
+			if (user) goto('/');
+		});
+	});
 </script>
-<form id="authcontainer" on:submit={handleSubmit}>
-    <br />
-    <h1>Create Account</h1>
-    <input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
-    <input name="username" placeholder="Username" bind:value={username} minlength="3" maxlength="18"/>
-    <input name="password" placeholder="Password" bind:value={password} type="password" />
-    <input name="confirmPassword" placeholder="Confirm Password" bind:value={confirmPassword} type="password" />
-    <br />
-    <button type="submit" on:submit={handleSubmit}>Continue</button>
-</form>
 
+<form id="authcontainer" on:submit={handleSubmit}>
+	<h1>DoppChat</h1>
+	<p>Create Account</p>
+	<input
+		name="username"
+		placeholder="Username"
+		bind:value={username}
+		minlength="3"
+		maxlength="20"
+	/>
+	<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
+	<input
+		name="password"
+		placeholder="Password"
+		bind:value={password}
+		minlength="6"
+		type="password"
+	/>
+	<input
+		name="confirmPassword"
+		placeholder="Confirm Password"
+		minlength="6"
+		bind:value={confirmPassword}
+		type="password"
+	/>
+	<br />
+	<button type="submit">Continue</button>
+</form>
 
 <style>
 	:root {
@@ -68,5 +100,15 @@
 		margin: auto;
 		padding: 2rem;
 		justify-content: center;
+	}
+	h1 {
+		color: #e7dfc6;
+		font-size: 2.5rem;
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
+	p {
+		font-size: 1.5rem;
+		margin-top: 0;
 	}
 </style>
