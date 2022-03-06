@@ -33,7 +33,8 @@ export function getCurrentUser() {
 }
 
 export function logout() {
-	signOut(auth).catch(console.error);
+	auth.signOut()
+	.catch(console.error);
 }
 
 export function signUp(username: string, email: string, password: string) {
