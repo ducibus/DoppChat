@@ -3,7 +3,7 @@
 	import LandingPage from '$lib/LandingPage.svelte';
 	import { firebaseUser } from '$lib/authHandler';
 	import type { User } from 'firebase/auth';
-	$: CurrentUser = null as User | null;
+	let CurrentUser: User | null = null;
 	firebaseUser.subscribe(
 		(user) => {
 			CurrentUser = user;
