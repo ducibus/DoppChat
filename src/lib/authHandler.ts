@@ -47,8 +47,8 @@ export function getCurrentUser() {
 }
 
 export function logout() {
-	auth.signOut()
-	.catch(console.error);
+	auth.signOut().catch(console.error);
+	window.location.reload();
 }
 
 export function signUp(username: string, email: string, password: string) {
