@@ -1,17 +1,30 @@
 import firebaseConfig from './firebaseConfig';
 import { initializeApp } from 'firebase/app';
+import { writable } from 'svelte/store';
 const app = initializeApp(firebaseConfig);
+
 import {
 	GoogleAuthProvider,
 	getAuth,
+	onAuthStateChanged,
 	signInWithPopup,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	updateProfile,
 	signOut
 } from 'firebase/auth';
-const provider = new GoogleAuthProvider();
+
+import type { User } from 'firebase/auth';
+
+export const firebaseUser = writable(null as User | null);
 const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+	if (user) {
+		firebaseUser.set(user);
+	}
+});
+
+const provider = new GoogleAuthProvider();
 
 export function login(email: string, password: string) {
 	signInWithEmailAndPassword(auth, email, password).catch((error) => {
@@ -20,6 +33,7 @@ export function login(email: string, password: string) {
 		alert(`${errorCode}: ${errorMessage}`);
 	});
 }
+
 export function googleLogin() {
 	signInWithPopup(auth, provider).catch((error) => {
 		const errorCode = error.code;

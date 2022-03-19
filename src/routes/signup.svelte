@@ -1,8 +1,15 @@
 <script lang="ts">
-	import { signUp } from '$lib/authHandler';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { getAuth, onAuthStateChanged } from 'firebase/auth';
+	import { signUp } from '$lib/authHandler';
+	import { firebaseUser } from '$lib/authHandler';
+	firebaseUser.subscribe(
+		(user) => {
+			if (user) goto('/');
+		},
+		(error) => {
+			console.log(error);
+		}
+	);
 
 	let username: string;
 	let email: string;
@@ -17,12 +24,6 @@
 			alert('Passwords do not match');
 		}
 	}
-	onMount(() => {
-		let auth = getAuth();
-		onAuthStateChanged(auth, (user) => {
-			if (user) goto('/');
-		});
-	});
 </script>
 
 <form id="authcontainer" on:submit={handleSubmit}>
