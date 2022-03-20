@@ -1,6 +1,7 @@
 import firebaseConfig from './firebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { writable } from 'svelte/store';
+import { newError } from './errorStore';
 const app = initializeApp(firebaseConfig);
 
 import {
@@ -30,7 +31,7 @@ export function login(email: string, password: string) {
 	signInWithEmailAndPassword(auth, email, password).catch((error) => {
 		const errorCode = error.code;
 		const errorMessage = error.message;
-		alert(`${errorCode}: ${errorMessage}`);
+		newError(errorCode, errorMessage);
 	});
 }
 
@@ -38,7 +39,7 @@ export function googleLogin() {
 	signInWithPopup(auth, provider).catch((error) => {
 		const errorCode = error.code;
 		const errorMessage = error.message;
-		alert(`${errorCode}: ${errorMessage}`);
+		newError(errorCode, errorMessage);
 	});
 }
 
@@ -61,6 +62,6 @@ export function signUp(username: string, email: string, password: string) {
 		.catch((error) => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
-			alert(`${errorCode}: ${errorMessage}`);
+			newError(errorCode, errorMessage);
 		});
 }
