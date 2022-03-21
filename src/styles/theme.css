@@ -1,0 +1,36 @@
+strong {
+	color: #e7dfc6;
+	font-weight: 600;
+	background-image: linear-gradient(to left, #673699, #9446e2);
+	border-radius: 3px;
+	padding: 0px 8px 4px 8px;
+}
+input {
+	border: 2px solid #673699;
+	padding: 10px 8px;
+	font-size: 1rem;
+	border-radius: 0.2rem;
+	background-color: #2a2b2e;
+	color: #e9f1f7;
+}
+input:focus {
+	outline: #673699 solid 2px;
+}
+button {
+	border: 5px solid #9446e2;
+	padding: 4px 8px;
+	border-radius: 0.2rem;
+	font-size: 1.25rem;
+	background-color: #9446e2;
+	color: #e9f1f7;
+}
+button:hover {
+	scale: 105%;
+}
+button:active {
+	scale: 98%;
+}
+a {
+	color: #9446e2;
+	text-decoration: none;
+}

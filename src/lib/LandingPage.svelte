@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { login, googleLogin } from '../lib/authHandler';
+	import { login, googleLogin } from '$lib/authHandler';
+	import '../styles/authRoot.css';
 	function handleSubmit(e: any) {
 		e.preventDefault();
 		login(email, password);
@@ -8,44 +9,33 @@
 	let password: string;
 </script>
 
-<main>
-	<div id="intro">
-		<h1>DoppChat</h1>
-		<p>
-			Create ephemeral chat rooms and invite your friends to the <strong>decentralized Dopps</strong
-			><br /><br />
-			<a href="https://docs.doppchat.ml" target="_blank">Learn more</a> about the project.
-		</p>
-	</div>
+<div class="root">
+	<main>
+		<div id="intro">
+			<h1>DoppChat</h1>
+			<p>
+				Create ephemeral chat rooms and invite your friends to the <strong
+					>decentralized Dopps</strong
+				><br /><br />
+				<a href="https://docs.doppchat.ml" target="_blank">Learn more</a> about the project.
+			</p>
+		</div>
 
-	<form id="authcontainer" on:submit={handleSubmit}>
-		<br />
-		<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
-		<input name="password" placeholder="Password" bind:value={password} type="password" />
-		<br />
-		<button type="submit">Login</button>
-		<button type="button" on:click={googleLogin} class="login-with-google-btn">
-			Sign in with Google
-		</button>
-		<spam>Don't have an account yet? <a href="./signup">Create one!</a></spam>
-	</form>
-</main>
+		<form id="authcontainer" on:submit={handleSubmit}>
+			<br />
+			<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
+			<input name="password" placeholder="Password" bind:value={password} type="password" />
+			<br />
+			<button type="submit">Login</button>
+			<button type="button" on:click={googleLogin} class="login-with-google-btn">
+				Sign in with Google
+			</button>
+			<spam>Don't have an account yet? <a href="./signup">Create one!</a></spam>
+		</form>
+	</main>
+</div>
 
 <style>
-	:root {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-			'Open Sans', 'Helvetica Neue', sans-serif;
-		background-color: #101827;
-		color: #e9f1f7;
-		text-align: center;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: -webkit-calc(100% - 10px);
-		height: -moz-calc(100% - 10px);
-		height: calc(100% - 10px);
-		border: 5px solid #9446e2;
-	}
 	main {
 		display: grid;
 		gap: 4rem;
@@ -59,38 +49,6 @@
 		font-size: 1.5rem;
 		line-height: 1.5;
 	}
-	strong {
-		color: #e7dfc6;
-		font-weight: 600;
-		background-image: linear-gradient(to left, #673699, #9446e2);
-		border-radius: 3px;
-		padding: 0px 8px 4px 8px;
-	}
-	input {
-		border: 2px solid #673699;
-		padding: 10px 8px;
-		font-size: 1rem;
-		border-radius: 0.2rem;
-		background-color: #2a2b2e;
-		color: #e9f1f7;
-	}
-	input:focus {
-		outline: #673699 solid 2px;
-	}
-	button {
-		border: 5px solid #9446e2;
-		padding: 4px 8px;
-		border-radius: 0.2rem;
-		font-size: 1.25rem;
-		background-color: #9446e2;
-		color: #e9f1f7;
-	}
-	button:hover {
-		scale: 105%;
-	}
-	button:active {
-		scale: 98%;
-	}
 	#authcontainer {
 		display: grid;
 		gap: 0.5rem;
@@ -100,10 +58,6 @@
 	}
 	#intro {
 		margin: auto;
-	}
-	a {
-		color: #9446e2;
-		text-decoration: none;
 	}
 	.login-with-google-btn {
 		transition: background-color 0.3s, box-shadow 0.3s;

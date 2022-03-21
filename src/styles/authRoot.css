@@ -1,0 +1,14 @@
+.root {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+		'Open Sans', 'Helvetica Neue', sans-serif;
+	background-color: #101827;
+	color: #e9f1f7;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: -webkit-calc(100vh - 10px);
+	height: -moz-calc(100vh - 10px);
+	height: calc(100vh - 10px);
+	border: 5px solid #9446e2;
+}

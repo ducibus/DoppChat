@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { signUp } from '$lib/authHandler';
 	import { firebaseUser } from '$lib/authHandler';
+	import '../styles/authRoot.css';
 	firebaseUser.subscribe(
 		(user) => {
 			if (user) goto('/');
@@ -26,50 +27,38 @@
 	}
 </script>
 
-<form id="authcontainer" on:submit={handleSubmit}>
-	<h1>DoppChat</h1>
-	<p>Create Account</p>
-	<input
-		name="username"
-		placeholder="Username"
-		bind:value={username}
-		minlength="3"
-		maxlength="20"
-	/>
-	<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
-	<input
-		name="password"
-		placeholder="Password"
-		bind:value={password}
-		minlength="6"
-		type="password"
-	/>
-	<input
-		name="confirmPassword"
-		placeholder="Confirm Password"
-		minlength="6"
-		bind:value={confirmPassword}
-		type="password"
-	/>
-	<br />
-	<button type="submit">Continue</button>
-</form>
+<div class="root">
+	<form id="authcontainer" on:submit={handleSubmit}>
+		<h1>DoppChat</h1>
+		<p>Create Account</p>
+		<input
+			name="username"
+			placeholder="Username"
+			bind:value={username}
+			minlength="3"
+			maxlength="20"
+		/>
+		<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
+		<input
+			name="password"
+			placeholder="Password"
+			bind:value={password}
+			minlength="6"
+			type="password"
+		/>
+		<input
+			name="confirmPassword"
+			placeholder="Confirm Password"
+			minlength="6"
+			bind:value={confirmPassword}
+			type="password"
+		/>
+		<br />
+		<button type="submit">Continue</button>
+	</form>
+</div>
 
 <style>
-	:root {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-			'Open Sans', 'Helvetica Neue', sans-serif;
-		background-color: #101827;
-		color: #e9f1f7;
-		text-align: center;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: -webkit-calc(100% - 10px);
-		height: -moz-calc(100% - 10px);
-		height: calc(100% - 10px);
-		border: 5px solid #9446e2;
-	}
 	input {
 		border: 2px solid #673699;
 		padding: 10px 8px;
