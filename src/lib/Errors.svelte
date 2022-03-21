@@ -5,10 +5,6 @@
 	errorStore.subscribe((errors) => {
 		stack = errors;
 	});
-	function removeOld() {
-		removeError(stack[0]?.id);
-	}
-	setInterval(removeOld, 5000);
 </script>
 
 <div class="container">

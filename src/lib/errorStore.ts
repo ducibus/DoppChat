@@ -11,7 +11,11 @@ export const errorStore = writable([] as Error[]);
 export const newError = (code: string, message: string) => {
 	errorStore.update((errors) => {
 		const lastError = errors[errors.length - 1];
-		return [...errors, { id: lastError ? lastError.id + 1 : 1, code: code, message: message }];
+		const newId = lastError ? lastError.id + 1 : 1;
+		setTimeout(() => {
+			removeError(newId);
+		}, 5000);
+		return [...errors, { id: newId, code: code, message: message }];
 	});
 };
 
