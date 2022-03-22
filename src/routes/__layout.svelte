@@ -1,5 +1,5 @@
 <script>
-	import '../styles/theme.css';
+	import '../styles/global.css';
 	import Errors from '$lib/Errors.svelte';
 </script>
 
