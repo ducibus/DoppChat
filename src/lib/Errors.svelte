@@ -1,15 +1,10 @@
 <script lang="ts">
 	import { errorStore, removeError } from './errorStore';
-	import type { Error } from './errorStore';
-	let stack: Error[] = [];
-	errorStore.subscribe((errors) => {
-		stack = errors;
-	});
 </script>
 
 <div class="container">
 	<ul>
-		{#each stack as error}
+		{#each $errorStore as error}
 			<li>
 				<p class="text">{error.code}: {error.message}</p>
 				<div class="close" on:click={() => removeError(error.id)}>
