@@ -23,8 +23,21 @@
 
 		<form id="authcontainer" on:submit={handleSubmit}>
 			<br />
-			<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
-			<input name="password" placeholder="Password" bind:value={password} type="password" />
+			<input
+				required
+				name="email"
+				placeholder="Email"
+				bind:value={email}
+				minlength="3"
+				maxlength="20"
+			/>
+			<input
+				required
+				name="password"
+				placeholder="Password"
+				bind:value={password}
+				type="password"
+			/>
 			<br />
 			<button type="submit">Login</button>
 			<button type="button" on:click={googleLogin} class="login-with-google-btn">

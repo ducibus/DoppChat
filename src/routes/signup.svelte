@@ -32,14 +32,23 @@
 		<h1>DoppChat</h1>
 		<p>Create Account</p>
 		<input
+			required
 			name="username"
 			placeholder="Username"
 			bind:value={username}
 			minlength="3"
 			maxlength="20"
 		/>
-		<input name="email" placeholder="Email" bind:value={email} minlength="3" maxlength="20" />
 		<input
+			required
+			name="email"
+			placeholder="Email"
+			bind:value={email}
+			minlength="3"
+			maxlength="20"
+		/>
+		<input
+			required
 			name="password"
 			placeholder="Password"
 			bind:value={password}
@@ -47,6 +56,7 @@
 			type="password"
 		/>
 		<input
+			required
 			name="confirmPassword"
 			placeholder="Confirm Password"
 			minlength="6"
