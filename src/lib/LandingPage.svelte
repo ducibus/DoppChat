@@ -25,6 +25,7 @@
 			<br />
 			<input
 				required
+				autocomplete="email"
 				name="email"
 				placeholder="Email"
 				bind:value={email}
@@ -33,6 +34,7 @@
 			/>
 			<input
 				required
+				autocomplete="current-password"
 				name="password"
 				placeholder="Password"
 				bind:value={password}

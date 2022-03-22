@@ -33,6 +33,7 @@
 		<p>Create Account</p>
 		<input
 			required
+			autocomplete="nickname"
 			name="username"
 			placeholder="Username"
 			bind:value={username}
@@ -41,6 +42,7 @@
 		/>
 		<input
 			required
+			autocomplete="email"
 			name="email"
 			placeholder="Email"
 			bind:value={email}
@@ -49,6 +51,7 @@
 		/>
 		<input
 			required
+			autocomplete="new-password"
 			name="password"
 			placeholder="Password"
 			bind:value={password}

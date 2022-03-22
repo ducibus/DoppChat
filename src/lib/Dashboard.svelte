@@ -1,11 +1,20 @@
 <script lang="ts">
-	export let user: any;
-	$: username = user.displayName;
-	import { logout } from '../lib/authHandler';
+	import { logout, firebaseUser } from '../lib/authHandler';
+	firebaseUser.subscribe(
+		(user) => {
+			if (!user) window.location.reload();
+		},
+		(error) => {
+			console.log(error);
+		}
+	);
+	import '../styles/authRoot.css';
 </script>
 
-<p>Welcome back, {username}!</p>
-<button class="btn-logout" type="button" on:click={logout}>Log out</button>
+<div class="root">
+	<p>Welcome back, {$firebaseUser?.displayName}!</p>
+	<button class="btn-logout" type="button" on:click={logout}>Log out</button>
+</div>
 
 <style>
 	.btn-logout {
