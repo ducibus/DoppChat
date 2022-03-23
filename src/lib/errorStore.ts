@@ -14,7 +14,7 @@ export const newError = (code: string, message: string) => {
 		const newId = lastError ? lastError.id + 1 : 1;
 		setTimeout(() => {
 			removeError(newId);
-		}, 4700);
+		}, 5000);
 		return [...errors, { id: newId, code: code, message: message }];
 	});
 };

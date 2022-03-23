@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { errorStore, removeError } from './errorStore';
+	import { fly } from 'svelte/transition';
 </script>
 
 <div class="container">
 	<ul>
 		{#each $errorStore as error}
-			<li class="show" id={error.id.toString()}>
+			<li in:fly={{ x: 100, duration: 200 }} out:fly={{ x: 100, duration: 200 }}>
 				<p class="text">{error.code}: {error.message}</p>
 				<div class="close" on:click={() => removeError(error.id)}>
 					<svg width="18" height="18" viewBox="0 0 23 23"
@@ -40,17 +41,6 @@
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 			'Open Sans', 'Helvetica Neue', sans-serif;
 	}
-	@keyframes pop {
-		0% {
-			opacity: 0;
-			display: none;
-			transform: translateX(50px);
-		}
-		50% {
-			opacity: 1;
-			transform: translateX(0px);
-		}
-	}
 	li {
 		background: linear-gradient(15deg, rgb(255, 89, 109), rgb(215, 44, 44));
 		width: 225px;
@@ -61,10 +51,6 @@
 		justify-content: center;
 		position: relative;
 		border-radius: 4px;
-		animation-name: pop;
-		animation-duration: 2900ms;
-		animation-direction: alternate;
-		animation-iteration-count: 2;
 	}
 	.text {
 		margin: auto auto auto 0;
