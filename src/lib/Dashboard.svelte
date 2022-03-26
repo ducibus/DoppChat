@@ -17,6 +17,7 @@
 	}
 	let doppsPromise = getDopps();
 	let long: boolean;
+	let newDoppName: string;
 	doppsPromise.then((dopps) => {
 		long = dopps.length > 4;
 	});
@@ -30,6 +31,10 @@
 	const share = (dopp: QueryDocumentSnapshot<DocumentData>) => {
 		const shareData = getShareData(dopp);
 		navigator.share(shareData);
+	};
+	let next = false;
+	const openNext = () => {
+		next = true;
 	};
 </script>
 
@@ -93,13 +98,19 @@
 				</li>
 			{/each}
 			<li>
-				<svg height="98" width="98" viewBox="0 0 20 20" fill="currentColor">
-					<path
-						fill-rule="evenodd"
-						d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-						clip-rule="evenodd"
-					/>
-				</svg>
+				<div class="create" class:hide={next === true} on:click={openNext}>
+					<svg height="98" width="98" viewBox="0 0 20 20" fill="currentColor">
+						<path
+							fill-rule="evenodd"
+							d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</div>
+				<div class:hide={next === false}>
+					<input placeholder="Name" type="text" bind:value={newDoppName} />
+					<button>Create</button>
+				</div>
 			</li>
 		</ul>
 	{:catch error}
@@ -124,6 +135,10 @@
 	}
 	.justify {
 		justify-content: center;
+	}
+	input {
+		width: 150px;
+		margin: 20px;
 	}
 	li {
 		height: 350px;
@@ -156,8 +171,20 @@
 		justify-items: center;
 		align-items: center;
 	}
-	li:last-child:hover {
+	.create {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 16px;
+		height: 100%;
+		width: 100%;
+	}
+	.create:hover {
 		background-color: #9446e2;
+	}
+	.hide {
+		display: none;
+		transition: 0.5s;
 	}
 	ul::-webkit-scrollbar {
 		width: 10px;
