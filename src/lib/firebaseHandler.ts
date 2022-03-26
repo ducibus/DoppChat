@@ -2,6 +2,7 @@ import firebaseConfig from './firebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { writable } from 'svelte/store';
 import { newError } from './errorStore';
+
 const app = initializeApp(firebaseConfig);
 
 import {
@@ -11,11 +12,12 @@ import {
 	signInWithPopup,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
-	updateProfile,
-	signOut
+	updateProfile
 } from 'firebase/auth';
-
 import type { User } from 'firebase/auth';
+
+import { getFirestore } from 'firebase/firestore';
+export const db = getFirestore(app);
 
 export const firebaseUser = writable(null as User | null);
 const auth = getAuth();

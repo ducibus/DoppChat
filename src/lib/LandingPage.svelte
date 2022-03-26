@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { login, googleLogin } from '$lib/authHandler';
+	import { login, googleLogin } from '$lib/firebaseHandler';
 	import '../styles/authRoot.css';
 	function handleSubmit(e: any) {
 		e.preventDefault();

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { signUp } from '$lib/authHandler';
-	import { firebaseUser } from '$lib/authHandler';
+	import { signUp, firebaseUser } from '$lib/firebaseHandler';
 	import '../styles/authRoot.css';
 	firebaseUser.subscribe(
 		(user) => {

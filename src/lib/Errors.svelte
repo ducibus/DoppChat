@@ -40,6 +40,7 @@
 		margin: auto;
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 			'Open Sans', 'Helvetica Neue', sans-serif;
+		color: #000;
 	}
 	li {
 		background: linear-gradient(15deg, rgb(255, 89, 109), rgb(215, 44, 44));
