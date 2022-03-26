@@ -1,7 +1,16 @@
 <script lang="ts">
 	import { logout, firebaseUser, db } from '$lib/firebaseHandler';
-	import { collection, addDoc, getDocs, where, orderBy, query } from 'firebase/firestore';
+	import {
+		collection,
+		addDoc,
+		getDocs,
+		where,
+		orderBy,
+		query,
+		Timestamp
+	} from 'firebase/firestore';
 	import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
+	import { newError } from './errorStore';
 	firebaseUser.subscribe(
 		(user) => {
 			if (!user) window.location.reload();
@@ -11,9 +20,32 @@
 		}
 	);
 	async function getDopps() {
-		const doppQuery = query(collection(db, 'dopps'), where('owner', '==', $firebaseUser?.uid));
+		const doppQuery = query(
+			collection(db, 'dopps'),
+			where('owner', '==', $firebaseUser?.uid),
+			orderBy('created_at', 'desc')
+		);
 		const doppsData = await getDocs(doppQuery);
 		return doppsData.docs;
+	}
+	async function hash(string: string) {
+		const utf8 = new TextEncoder().encode(string);
+		const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+		const hashArray = Array.from(new Uint8Array(hashBuffer));
+		const hashHex = hashArray.map((bytes) => bytes.toString(16).padStart(2, '0')).join('');
+		return hashHex;
+	}
+	function generateId() {
+		return hash((Math.random() + 1).toString(36).substring(7) + Date.now().toString);
+	}
+	async function createNewDopp() {
+		await addDoc(collection(db, 'dopps'), {
+			name: newDoppName,
+			owner: $firebaseUser?.uid,
+			created_at: Timestamp.now(),
+			dopp: await generateId()
+		});
+		window.location.reload();
 	}
 	let doppsPromise = getDopps();
 	let long: boolean;
@@ -109,7 +141,7 @@
 				</div>
 				<div class:hide={next === false}>
 					<input placeholder="Name" type="text" bind:value={newDoppName} />
-					<button>Create</button>
+					<button on:click={createNewDopp}>Create</button>
 				</div>
 			</li>
 		</ul>
