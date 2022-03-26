@@ -13,15 +13,17 @@ body {
 	text-align: center;
 }
 input {
-	border: 2px solid #673699;
-	padding: 10px 8px;
-	font-size: 1rem;
+	border-bottom: solid #673699;
+	border-width: 0px 0px 3px 0px;
+	padding: 0.7rem;
+	font-size: 24px;
+	height: 1.5rem;
 	border-radius: 0.2rem;
 	background-color: #2a2b2e;
 	color: #e9f1f7;
 }
 input:focus {
-	outline: #673699 solid 2px;
+	outline: none;
 }
 button {
 	border: 5px solid #9446e2;

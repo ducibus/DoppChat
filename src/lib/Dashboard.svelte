@@ -201,10 +201,6 @@
 		background-color: #101827;
 		color: #e9f1f7;
 		text-align: center;
-		border: 5px solid #9446e2;
-		height: -webkit-calc(100vh - 10px);
-		height: -moz-calc(100vh - 10px);
-		height: calc(100vh - 10px);
 	}
 	h1 {
 		margin: 4rem;
