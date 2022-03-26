@@ -74,6 +74,11 @@
 	#intro {
 		margin: auto;
 	}
+	
+	::-webkit-input-placeholder {
+		font-size: 1.25rem;
+	}
+
 	.login-with-google-btn {
 		transition: background-color 0.3s, box-shadow 0.3s;
 

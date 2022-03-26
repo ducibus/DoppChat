@@ -96,6 +96,18 @@
 	button:active {
 		scale: 98%;
 	}
+	button:focus {
+		outline: #9446e2 solid 2px;
+	}
+
+	:placeholder-shown {
+		font-size: 1.5rem;
+	}
+
+	::-webkit-input-placeholder {
+		font-size: 1.2rem;
+	}
+
 	#authcontainer {
 		display: grid;
 		gap: 0.5rem;
@@ -105,12 +117,12 @@
 	}
 	h1 {
 		color: #e7dfc6;
-		font-size: 2.5rem;
+		font-size: 3rem;
 		margin-bottom: 5px;
 		margin-top: 5px;
 	}
 	p {
-		font-size: 1.5rem;
+		font-size: 1.7rem;
 		margin-top: 0;
 	}
 </style>
