@@ -12,6 +12,7 @@ import {
 	signInWithPopup,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	sendEmailVerification,
 	updateProfile
 } from 'firebase/auth';
 import type { User } from 'firebase/auth';
@@ -38,11 +39,15 @@ export function login(email: string, password: string) {
 }
 
 export function googleLogin() {
-	signInWithPopup(auth, provider).catch((error) => {
-		const errorCode = error.code;
-		const errorMessage = error.message;
-		newError(errorCode, errorMessage);
-	});
+	signInWithPopup(auth, provider)
+		.then((result) => {
+			sendEmailVerification(result.user);
+		})
+		.catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			newError(errorCode, errorMessage);
+		});
 }
 
 export function getCurrentUser() {
@@ -60,6 +65,7 @@ export function signUp(username: string, email: string, password: string) {
 			updateProfile(result.user, {
 				displayName: username
 			});
+			sendEmailVerification(result.user);
 		})
 		.catch((error) => {
 			const errorCode = error.code;

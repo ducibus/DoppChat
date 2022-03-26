@@ -10,6 +10,7 @@
 		Timestamp
 	} from 'firebase/firestore';
 	import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
+	import { newError } from './errorStore';
 
 	// making sure only logged in users can see
 	firebaseUser.subscribe(
@@ -41,6 +42,8 @@
 			owner: $firebaseUser?.uid,
 			created_at: Timestamp.now(),
 			dopp: await generateId()
+		}).catch((error) => {
+			newError(error.code, error.message);
 		});
 		window.location.reload();
 	}
@@ -51,7 +54,16 @@
 			where('owner', '==', $firebaseUser?.uid),
 			orderBy('created_at', 'desc')
 		);
-		const doppsData = await getDocs(doppQuery);
+		const doppsData = await getDocs(doppQuery)
+			.then((dopps) => {
+				return dopps;
+			})
+			.catch((error) => {
+				newError(error.code, error.message);
+				return {
+					docs: []
+				};
+			});
 		return doppsData.docs;
 	}
 
