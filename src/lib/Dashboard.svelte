@@ -13,14 +13,9 @@
 	import { newError } from './errorStore';
 
 	// making sure only logged in users can see
-	firebaseUser.subscribe(
-		(user) => {
-			if (!user) window.location.reload();
-		},
-		(error) => {
-			console.log(error);
-		}
-	);
+	firebaseUser.subscribe((user) => {
+		if (!user) window.location.reload();
+	});
 
 	// utils
 	async function hash(string: string) {

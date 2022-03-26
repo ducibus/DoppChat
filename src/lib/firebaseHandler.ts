@@ -13,7 +13,8 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	sendEmailVerification,
-	updateProfile
+	updateProfile,
+	applyActionCode
 } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 
