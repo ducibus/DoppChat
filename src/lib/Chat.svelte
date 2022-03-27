@@ -1,9 +1,9 @@
 <script lang="ts">
 	export const ssr = false;
-	import Join from './Join.svelte';
-	import ChatMessage from './ChatMessage.svelte';
+	import Join from '$lib/Join.svelte';
+	import ChatMessage from '$lib/ChatMessage.svelte';
 	import { onMount } from 'svelte';
-	import { username, user } from './gunUser';
+	import { username, user } from '$lib/gunUser';
 	import debounce from 'lodash.debounce';
 	import GUN, { SEA } from 'gun';
 	const db = GUN();
