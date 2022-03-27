@@ -234,7 +234,7 @@
 		width: 250px;
 		min-width: 250px;
 		border-radius: 16px;
-		background: #25202e;
+		background: #261d38;
 		box-shadow: -0.5rem 0 1.5rem #000;
 		display: flex;
 		flex-direction: column;
