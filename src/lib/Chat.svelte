@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import { username, user } from '$lib/gunUser';
 	import debounce from 'lodash.debounce';
-	import GUN, { SEA } from 'gun';
+	import GUN from 'gun';
 	const db = GUN();
 
 	interface Message {
@@ -43,12 +43,10 @@
 			.map(match)
 			.once(async (data, id) => {
 				if (data) {
-					// Key for end-to-end encryption
-					const key = '#foo';
 					var message = {
 						// transform the data
 						who: await db.user(data).get('alias'), // a user might lie who they are! So let the user system detect whose data it is.
-						what: (await SEA.decrypt(data.what, key)) + '', // force decrypt as text.
+						what: data.what, // force decrypt as text.
 						when: GUN.state() // get the internal timestamp for the what property.
 					};
 					if (message.what) {
@@ -63,8 +61,7 @@
 			});
 	});
 	async function sendMessage() {
-		const secret = await SEA.encrypt(newMessage, '#foo');
-		const message = user.get('all').set({ what: secret });
+		const message = user.get('all').set({ what: newMessage });
 		const index = new Date().toISOString();
 		db.get('chat').get(index).put(message);
 		newMessage = '';
