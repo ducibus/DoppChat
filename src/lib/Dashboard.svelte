@@ -7,6 +7,8 @@
 		where,
 		orderBy,
 		query,
+		doc,
+		deleteDoc,
 		Timestamp
 	} from 'firebase/firestore';
 	import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
@@ -42,7 +44,6 @@
 		});
 		window.location.reload();
 	}
-	let doppsPromise = getDopps();
 	async function getDopps() {
 		const doppQuery = query(
 			collection(db, 'dopps'),
@@ -60,6 +61,16 @@
 				};
 			});
 		return doppsData.docs;
+	}
+	let doppsPromise = getDopps();
+	async function deleteDopp(dopp: QueryDocumentSnapshot<DocumentData>) {
+		await deleteDoc(doc(db, dopp.ref.path))
+			.then(() => {
+				window.location.reload();
+			})
+			.catch((error) => {
+				newError(error.code, error.message);
+			});
 	}
 
 	// boolean to check if the list of cards is long enough to be scrolled
@@ -84,7 +95,9 @@
 </script>
 
 <button class="btn-logout" type="button" on:click={logout}>Log out</button>
+<br />
 <h1>Hi {$firebaseUser?.displayName}</h1>
+<br />
 <h2>Here are your <strong>Dopps</strong></h2>
 {#await doppsPromise}
 	<p>Getting your Dopps . . .</p>
@@ -139,6 +152,27 @@
 					</svg>
 					<h3>Share</h3>
 				</button>
+				<button
+					class="dopp_btn"
+					on:click={() => {
+						deleteDopp(dopp);
+					}}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="45"
+						width="45"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+					<h3>Delete</h3>
+				</button>
 			</li>
 		{/each}
 		<li>
@@ -164,7 +198,7 @@
 
 <style>
 	h1 {
-		margin: 4rem;
+		margin: 2rem;
 	}
 	ul {
 		list-style: none;
@@ -200,8 +234,8 @@
 		width: 250px;
 		min-width: 250px;
 		border-radius: 16px;
-		background: #17141d;
-		box-shadow: -1rem 0 3rem #000;
+		background: #25202e;
+		box-shadow: -0.5rem 0 1.5rem #000;
 		display: flex;
 		flex-direction: column;
 		transition: 0.2s;
@@ -212,14 +246,14 @@
 	}
 	li:focus-within ~ li,
 	li:hover ~ li {
-		transform: translateX(80px);
+		transform: translateX(50px);
 	}
 
 	li:hover {
 		transform: translateY(-1rem);
 	}
 	li:not(:first-child) {
-		margin-left: -80px;
+		margin-left: -50px;
 	}
 	li:last-child {
 		justify-content: center;
