@@ -2,7 +2,7 @@
 	"name": "doppchat",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "svelte-kit dev --port 3000",
+		"dev": "svelte-kit dev --port 80",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -29,7 +29,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@types/lodash.debounce": "^4.0.6",
 		"firebase": "^9.6.7",
-		"gun": "^0.2020.1236"
+		"gun": "^0.2020.1236",
+		"lodash.debounce": "^4.0.8"
 	}
 }

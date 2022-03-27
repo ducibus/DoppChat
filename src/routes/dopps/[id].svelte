@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { firebaseUser, db } from '$lib/firebaseHandler';
-	import { collection, getDocs, where, query } from 'firebase/firestore';
+	import Chat from '$lib/Chat.svelte';
+	import { collection, getDocs, where, query, onSnapshot } from 'firebase/firestore';
+	import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
 	import { newError } from '$lib/errorStore';
-	import '../../styles/authRoot.css';
+	import { onDestroy, onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 	let id = $page.params.id;
+
+	let doppPromise = writable(null as null | QueryDocumentSnapshot<DocumentData>);
 	async function getDopps() {
 		const doppQuery = query(collection(db, 'dopps'), where('dopp', '==', id));
 		const dopp = await getDocs(doppQuery)
@@ -17,21 +22,29 @@
 					docs: []
 				};
 			});
-		return dopp.docs[0];
+		doppPromise.set(dopp.docs[0]);
+		let listener: () => void;
+		listener = onSnapshot(doppQuery, (dopp) => {
+			doppPromise.set(dopp.docs[0]);
+		});
+		onDestroy(() => {
+			listener();
+		});
 	}
-	const doppPromise = getDopps();
+	onMount(getDopps);
 </script>
 
-{#await doppPromise}
-	<p>Searching</p>
-{:then dopp}
-	{#if dopp?.exists() && $firebaseUser}
-		<p>Valid Dopp ✔: {dopp.data().name}</p>
-	{:else if dopp?.exists() && !$firebaseUser}
-		<p>Please <a href="/">login</a> to join this Dopp</p>
-	{:else if !dopp?.exists()}
-		<p>Dopp not found</p>
-	{/if}
-{:catch error}
-	<p>Error: {error.message}</p>
-{/await}
+{#if $firebaseUser}
+	{#await $doppPromise}
+		<p>Searching ...</p>
+	{:then dopp}
+		{#if dopp?.exists()}
+			<h1>{dopp.data().name}</h1>
+			<Chat />
+		{:else}
+			<p>Dopp not found</p>
+		{/if}
+	{/await}
+{:else}
+	<p>Please <a href="/">login</a> to join this Dopp</p>
+{/if}

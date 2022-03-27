@@ -74,7 +74,7 @@
 	#intro {
 		margin: auto;
 	}
-	
+
 	::-webkit-input-placeholder {
 		font-size: 1.25rem;
 	}
