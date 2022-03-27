@@ -14,7 +14,6 @@ import {
 	createUserWithEmailAndPassword,
 	sendEmailVerification,
 	updateProfile,
-	applyActionCode
 } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 
@@ -32,12 +31,15 @@ onAuthStateChanged(auth, (user) => {
 const provider = new GoogleAuthProvider();
 
 export function login(email: string, password: string) {
-	signInWithEmailAndPassword(auth, email, password).catch((error) => {
+	signInWithEmailAndPassword(auth, email, password).then((result) => {
+		if (!result.user.emailVerified) {
+		logout()}})
+		
+	.catch((error) => {
 		const errorCode = error.code;
 		const errorMessage = error.message;
 		newError(errorCode, errorMessage);
-	});
-}
+	})};
 
 export function googleLogin() {
 	signInWithPopup(auth, provider)
