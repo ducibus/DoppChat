@@ -1,12 +1,13 @@
 <script lang="ts">
 	export const ssr = false;
+	export let id: string;
 	import Join from '$lib/Join.svelte';
 	import ChatMessage from '$lib/ChatMessage.svelte';
 	import { onMount } from 'svelte';
 	import { username, user } from '$lib/gunUser';
 	import debounce from 'lodash.debounce';
 	import GUN, { SEA } from 'gun';
-	const db = GUN();
+	const db = GUN({ localStorage: false });
 
 	interface Message {
 		who: any;
@@ -29,18 +30,9 @@
 	}
 	$: debouncedWatchScroll = debounce(watchScroll, 1000);
 	onMount(() => {
-		var match = {
-			// lexical queries are kind of like a limited RegEx or Glob.
-			'.': {
-				// property selector
-				'>': new Date(+new Date() - 1 * 1000 * 60 * 60 * 3).toISOString() // find any indexed property larger ~3 hours ago
-			},
-			'-': 1 // filter in reverse
-		};
 		// Get Messages
-		db.get('chat')
-			// @ts-ignore
-			.map(match)
+		db.get(id)
+			.map()
 			.once(async (data, id) => {
 				if (data) {
 					const key = '#foo';
@@ -65,7 +57,7 @@
 		const secret = await SEA.encrypt(newMessage, '#foo');
 		const message = user.get('all').set({ what: secret });
 		const index = new Date().toISOString();
-		db.get('chat').get(index).put(message);
+		db.get(id).get(index).put(message);
 		newMessage = '';
 		canAutoScroll = true;
 		autoScroll();
@@ -94,7 +86,7 @@
 			<div class="dummy" bind:this={scrollBottom} />
 		</main>
 		<form on:submit|preventDefault={sendMessage}>
-			<input type="text" placeholder="Type a message..." bind:value={newMessage} maxlength="100" />
+			<input type="text" placeholder="Type a message..." bind:value={newMessage} maxlength="2000" />
 			<button type="submit" disabled={!newMessage}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +234,8 @@
 	.scroll-button {
 		position: fixed;
 		bottom: 80px;
-		left: 10px;
+		margin: auto 0;
+		width: 100%;
 		color: white;
 	}
 

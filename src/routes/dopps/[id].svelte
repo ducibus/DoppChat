@@ -41,7 +41,7 @@
 	{:then dopp}
 		{#if dopp?.exists()}
 			<h1>{dopp.data().name}</h1>
-			<Chat />
+			<Chat {id} />
 		{:else}
 			<p>Dopp not found</p>
 		{/if}

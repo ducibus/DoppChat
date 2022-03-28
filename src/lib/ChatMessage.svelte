@@ -46,12 +46,12 @@
 
 	.sent p {
 		color: white;
-		background: #0b93f6;
+		background: #6649b8;
 		align-self: flex-end;
 		text-align: right;
 	}
 	.received p {
-		background: #e5e5ea;
+		background: #bcbcc5;
 		color: black;
 		text-align: left;
 	}
