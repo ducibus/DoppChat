@@ -1,4 +1,5 @@
 <script lang="ts">
+	export const ssr = false;
 	import { page } from '$app/stores';
 	import { firebaseUser, db } from '$lib/firebaseHandler';
 	import Chat from '$lib/Chat.svelte';

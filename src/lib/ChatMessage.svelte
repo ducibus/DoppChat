@@ -1,4 +1,5 @@
 <script lang="ts">
+	export const ssr = false;
 	interface Message {
 		who: string;
 		what: string;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	export const ssr = false;
 	import { user } from '$lib/gunUser';
 	import { newError } from '$lib/errorStore';
 	import { firebaseUser } from '$lib/firebaseHandler';
