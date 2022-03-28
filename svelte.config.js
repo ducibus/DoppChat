@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 import viteConfig from './vite.config.js';
 
@@ -12,7 +12,8 @@ const config = {
 		adapter: adapter()
 	},
 
-	vite: viteConfig
+	vite: viteConfig,
+	target: '#svelte'
 };
 
 export default config;
