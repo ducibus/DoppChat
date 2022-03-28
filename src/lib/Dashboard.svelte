@@ -12,7 +12,7 @@
 		Timestamp
 	} from 'firebase/firestore';
 	import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
-	import { newError } from './errorStore';
+	import { newError } from '$lib/errorStore';
 
 	// making sure only logged in users can see
 	firebaseUser.subscribe((user) => {

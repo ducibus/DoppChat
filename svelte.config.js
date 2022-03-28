@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
+import viteConfig from './vite.config.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,38 +12,7 @@ const config = {
 		adapter: adapter()
 	},
 
-	vite: () => () => {
-		const moduleExclude = (match) => {
-			const m = (id) => id.indexOf(match) > -1;
-			return {
-				name: `exclude-${match}`,
-				resolveId(id) {
-					if (m(id)) return id;
-				},
-				load(id) {
-					if (m(id)) return `export default {}`;
-				}
-			};
-		};
-
-		return {
-			optimizeDeps: {
-				include: [
-					'gun',
-					'gun/gun',
-					'gun/sea',
-					'gun/sea.js',
-					'gun/lib/then',
-					'gun/lib/webrtc',
-					'gun/lib/radix',
-					'gun/lib/radisk',
-					'gun/lib/store',
-					'gun/lib/rindexed'
-				]
-			},
-			plugins: [moduleExclude('text-encoding')]
-		};
-	}
+	vite: viteConfig
 };
 
 export default config;
