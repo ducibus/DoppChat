@@ -1,7 +1,6 @@
 import GUN from 'gun';
-import 'gun/sea.js';
-import 'gun/axe.js';
-import 'gun/lib/erase.js';
+import 'gun/sea';
+import 'gun/axe';
 
 import { writable } from 'svelte/store';
 
